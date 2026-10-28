@@ -1,20 +1,28 @@
 package com.cesur.javGdaniM.presentation.controller;
 
-
 import com.cesur.javGdaniM.data.entidad.AplicacionDeTrabajo;
 import com.cesur.javGdaniM.data.entidad.EstadoCandidatura;
 import com.cesur.javGdaniM.data.repositorio.RepositorioAplicacion;
+import com.cesur.javGdaniM.negocio.excepcion.ArchivoInvalidoException;
+import com.cesur.javGdaniM.negocio.excepcion.FechaInvalidaException;
+import com.cesur.javGdaniM.negocio.excepcion.IdNoEncontradoException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 public class HistorialUsuario {
 
-    static void main(String[] args) {
+    public static void main(String[] args) {
+        if (args.length == 0) {
+            System.out.println("Error: No has introducido ningún comando.");
+            System.out.println("Comandos disponibles: -listar, -añadir, -ver, -borrar, -importar");
+            return;
+        }
 
-        RepositorioAplicacion repositorio = new RepositorioAplicacion();
         String comando = args[0];
+        RepositorioAplicacion repositorio = new RepositorioAplicacion();
 
         try {
             switch (comando) {
@@ -40,16 +48,16 @@ public class HistorialUsuario {
 
                 default:
                     System.out.println("Comando desconocido: " + comando);
-
             }
+        } catch (FechaInvalidaException | IdNoEncontradoException | ArchivoInvalidoException e) {
+            System.err.println("Error de aplicación: " + e.getMessage());
         } catch (Exception e) {
-            System.err.println("Error al ejecutar la operación: " + e.getMessage());
+            System.err.println("Error inesperado: " + e.getMessage());
         }
     }
 
     private static void Listar(String[] args, RepositorioAplicacion repositorio) {
         List<AplicacionDeTrabajo> lista = repositorio.leerFicheroPredeterminado();
-
 
         String estadoFiltro = null;
         String empresaFiltro = null;
@@ -86,7 +94,7 @@ public class HistorialUsuario {
         String empresa = null;
         EstadoCandidatura estado = EstadoCandidatura.PENDIENTE;
         LocalDate fecha = LocalDate.now();
-        int id = (int) (System.currentTimeMillis() % 10000); // Generador simple de ID único
+        int id = (int) (System.currentTimeMillis() % 10000);
 
         for (int i = 1; i < args.length; i++) {
             switch (args[i]) {
@@ -97,10 +105,23 @@ public class HistorialUsuario {
                     if (i + 1 < args.length) empresa = args[++i];
                     break;
                 case "--estado":
-                    if (i + 1 < args.length) estado = EstadoCandidatura.valueOf(args[++i].toUpperCase());
+                    if (i + 1 < args.length) {
+                        try {
+                            estado = EstadoCandidatura.valueOf(args[++i].toUpperCase());
+                        } catch (IllegalArgumentException e) {
+                            throw new ArchivoInvalidoException("El estado indicado no es válido.");
+                        }
+                    }
                     break;
                 case "--fecha":
-                    if (i + 1 < args.length) fecha = LocalDate.parse(args[++i], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                    if (i + 1 < args.length) {
+                        String fechaStr = args[++i];
+                        try {
+                            fecha = LocalDate.parse(fechaStr, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                        } catch (DateTimeParseException e) {
+                            throw new FechaInvalidaException("La fecha '" + fechaStr + "' no tiene el formato correcto (dd/MM/yyyy).");
+                        }
+                    }
                     break;
             }
         }
@@ -121,7 +142,14 @@ public class HistorialUsuario {
             return;
         }
 
-        int idBuscado = Integer.parseInt(args[1]);
+        int idBuscado;
+        try {
+            idBuscado = Integer.parseInt(args[1]);
+        } catch (NumberFormatException e) {
+            System.out.println("Error: El ID debe ser un número entero válido.");
+            return;
+        }
+
         List<AplicacionDeTrabajo> lista = repositorio.leerFicheroPredeterminado();
 
         for (AplicacionDeTrabajo app : lista) {
@@ -135,7 +163,8 @@ public class HistorialUsuario {
                 return;
             }
         }
-        System.out.println("No se encontró ninguna candidatura con el ID: " + idBuscado);
+
+        throw new IdNoEncontradoException("No se encontró ninguna candidatura con el ID: " + idBuscado);
     }
 
     private static void Borrar(String[] args, RepositorioAplicacion repositorio) {
@@ -144,7 +173,14 @@ public class HistorialUsuario {
             return;
         }
 
-        int idBorrar = Integer.parseInt(args[1]);
+        int idBorrar;
+        try {
+            idBorrar = Integer.parseInt(args[1]);
+        } catch (NumberFormatException e) {
+            System.out.println("Error: El ID debe ser un número entero válido.");
+            return;
+        }
+
         List<AplicacionDeTrabajo> lista = repositorio.leerFicheroPredeterminado();
         boolean encontrada = false;
 
@@ -164,7 +200,7 @@ public class HistorialUsuario {
             }
             System.out.println("Candidatura con ID " + idBorrar + " eliminada correctamente.");
         } else {
-            System.out.println("No se encontró ninguna candidatura con el ID: " + idBorrar);
+            throw new IdNoEncontradoException("No se pudo borrar: No existe ninguna candidatura con el ID " + idBorrar);
         }
     }
 
@@ -177,12 +213,13 @@ public class HistorialUsuario {
         String ficheroExterno = args[1];
         List<AplicacionDeTrabajo> importadas = repositorio.leerFichero(ficheroExterno);
 
+        if (importadas.isEmpty()) {
+            throw new ArchivoInvalidoException("El archivo a importar no existe o está vacío: " + ficheroExterno);
+        }
+
         for (AplicacionDeTrabajo app : importadas) {
             repositorio.guardar(app);
         }
         System.out.println("Se han importado " + importadas.size() + " candidaturas correctamente desde " + ficheroExterno);
     }
-
-
 }
-

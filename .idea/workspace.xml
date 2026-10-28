@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c3905101-7fce-4d47-a403-ff157908bed2" name="Changes" comment="Commit, carpeta de negocio hecha.">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cesur/javGdaniM/presentation/controller/HistorialUsuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cesur/javGdaniM/presentation/controller/HistorialUsuario.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Class" />
+        <option value="Exception" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Yanvier-cesur&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Yanvier-cesur/Ejercicio_IntegradorJaviDani.git&quot;,
+    &quot;accountId&quot;: &quot;981e0781-5756-4b1c-af7b-7a72996e153a&quot;
+  }
+}</component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.430555173251129E-5" />
+      <entry key="MS500" value="0.1733689423544166" />
+      <entry key="S2" value="2.3457342229143" />
+      <entry key="S5" value="5.947573257654953" />
+      <entry key="S10" value="8.881602649152423" />
+      <entry key="S30" value="11.956674662427211" />
+      <entry key="S60" value="12.930812367395127" />
+      <entry key="M2" value="13.546174728707744" />
+      <entry key="M5" value="15.007499689846776" />
+      <entry key="M10" value="19.6001683389173" />
+      <entry key="M15" value="27.438318198809622" />
+      <entry key="M30" value="58.822366590337076" />
+      <entry key="H1" value="108.02214297107425" />
+      <entry key="H2" value="154.5392405969001" />
+      <entry key="H4" value="187.04402110335565" />
+      <entry key="D1" value="220.4955648997094" />
+      <entry key="W1" value="226.9099761537339" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0" />
+      <entry key="S30" value="1.0000050656997195" />
+      <entry key="S60" value="1.0061512445040164" />
+      <entry key="M2" value="1.229250372808924" />
+      <entry key="M5" value="3.062356239129324" />
+      <entry key="M10" value="5.409608218279011" />
+      <entry key="M15" value="6.908989317234925" />
+      <entry key="M30" value="9.654049043386372" />
+      <entry key="H1" value="12.276609776382063" />
+      <entry key="H2" value="14.264161813990993" />
+      <entry key="H4" value="15.518732687330234" />
+      <entry key="D1" value="16.73531486232546" />
+      <entry key="W1" value="16.961721740927896" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="0.006661726705493595" />
+      <entry key="MS500" value="0.4811707745946305" />
+      <entry key="S2" value="3.0178784529833353" />
+      <entry key="S5" value="6.787523255490968" />
+      <entry key="S10" value="9.795101866136193" />
+      <entry key="S30" value="12.926155515044254" />
+      <entry key="S60" value="13.921399778019406" />
+      <entry key="M2" value="14.76624365572875" />
+      <entry key="M5" value="18.061642202551045" />
+      <entry key="M10" value="25.002475239818402" />
+      <entry key="M15" value="34.34064991574786" />
+      <entry key="M30" value="68.47074034726705" />
+      <entry key="H1" value="120.29444556308195" />
+      <entry key="H2" value="168.80061747668583" />
+      <entry key="H4" value="202.5611501679152" />
+      <entry key="D1" value="237.23057718693508" />
+      <entry key="W1" value="243.87165371485193" />
+    </decayedShown>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0,
+  &quot;fromUser&quot;: false
+}</component>
+  <component name="ProjectId" id="3LH7S3t3AZvk2rZ3IcWDZZ76MpY" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.HistorialUsuario.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/JavierGarcíaMendoza/IdeaProjects/Ejercicio_IntegradorJaviDani/src/main/java/org/example/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;Errors&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-a203e0a19954-intellij.indexing.shared.core-IU-262.10968.63" />
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-IU-262.10968.63" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c3905101-7fce-4d47-a403-ff157908bed2" name="Changes" comment="" />
+      <created>1793099139313</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1793099139313</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Commit de inicio." />
+    <MESSAGE value="Carpeta de Entidad dentro de Datos, realizada." />
+    <MESSAGE value="Commit para que mi compañero pueda trabajar con todas las carpetas creadas." />
+    <MESSAGE value="Commit, carpeta de negocio hecha." />
+    <option name="LAST_COMMIT_MESSAGE" value="Commit, carpeta de negocio hecha." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/Main.java</url>
+          <line>13</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

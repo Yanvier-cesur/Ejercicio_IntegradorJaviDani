@@ -48,7 +48,7 @@ public class ServicioCandidatura {
             throw new ArchivoInvalidoException("Error al leer el archivo para calcular el ID.");
         }
 
-        // 3. Formatear y guardar la línea
+
         String nuevaLinea = nuevoId + ";" + titulo + ";" + empresa + ";" + estado + ";" + fechaStr;
         try (FileWriter escritor = new FileWriter(RUTA_ARCHIVO, true)) {
             escritor.write(nuevaLinea + "\n");
@@ -72,7 +72,7 @@ public class ServicioCandidatura {
             throw new ArchivoInvalidoException("Error al leer el archivo.");
         }
 
-        // Si termina el bucle y no la encuentra, lanza tu excepción personalizada
+
         throw new IdNoEncontradoException("La candidatura con ID " + idBuscado + " no existe.");
     }
 

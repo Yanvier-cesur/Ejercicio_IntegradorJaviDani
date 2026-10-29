@@ -32,10 +32,10 @@ public class ServicioCandidatura {
     public void anadirCandidatura(String titulo, String empresa, String estado, String fechaStr) {
         asegurarArchivoExiste();
 
-        // 1. Validar formato de fecha (dd/MM/yyyy) usando tu excepción
+
         validarFormatoFecha(fechaStr);
 
-        // 2. Calcular el siguiente ID automático
+
         int nuevoId = 1;
         try {
             List<String> lineas = Files.readAllLines(Paths.get(RUTA_ARCHIVO));

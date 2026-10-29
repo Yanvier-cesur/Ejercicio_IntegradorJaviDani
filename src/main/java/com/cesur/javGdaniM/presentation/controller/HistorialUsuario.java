@@ -12,8 +12,22 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
+/**
+ * Controlador de presentación que gestiona el historial de candidaturas desde la línea de comandos.
+ * <p>
+ * Interpreta el comando recibido como primer argumento y delega en la operación correspondiente:
+ * listar, añadir, ver, borrar o importar candidaturas.
+ */
 public class HistorialUsuario {
 
+    /**
+     * Punto de entrada de la aplicación.
+     * <p>
+     * Lee el comando indicado en el primer argumento y ejecuta la operación asociada,
+     * capturando los posibles errores de la aplicación.
+     *
+     * @param args argumentos de la línea de comandos; el primero indica el comando a ejecutar
+     */
     public static void main(String[] args) {
         if (args.length == 0) {
             System.out.println("Error: No has introducido ningún comando.");
@@ -56,6 +70,14 @@ public class HistorialUsuario {
         }
     }
 
+    /**
+     * Lista las candidaturas almacenadas, permitiendo filtrarlas por estado y por empresa.
+     * <p>
+     * Los filtros se indican con las opciones {@code --estado} y {@code --empresa}.
+     *
+     * @param args argumentos de la línea de comandos, incluidos los filtros opcionales
+     * @param repositorio repositorio del que se leen las candidaturas
+     */
     private static void Listar(String[] args, RepositorioAplicacion repositorio) {
         List<AplicacionDeTrabajo> lista = repositorio.leerFicheroPredeterminado();
 
@@ -89,6 +111,15 @@ public class HistorialUsuario {
         }
     }
 
+    /**
+     * Añade una nueva candidatura a partir de los parámetros indicados.
+     * <p>
+     * Los valores se indican con las opciones {@code --titulo}, {@code --empresa},
+     * {@code --estado} y {@code --fecha}; el título y la empresa son obligatorios.
+     *
+     * @param args argumentos de la línea de comandos con los datos de la candidatura
+     * @param repositorio repositorio en el que se guarda la nueva candidatura
+     */
     private static void Anadir(String[] args, RepositorioAplicacion repositorio) {
         String titulo = null;
         String empresa = null;
@@ -136,6 +167,12 @@ public class HistorialUsuario {
         System.out.println("Candidatura añadida correctamente con ID: " + id);
     }
 
+    /**
+     * Muestra los detalles de la candidatura cuyo identificador se indica como segundo argumento.
+     *
+     * @param args argumentos de la línea de comandos; el segundo debe ser el identificador de la candidatura
+     * @param repositorio repositorio del que se leen las candidaturas
+     */
     private static void Ver(String[] args, RepositorioAplicacion repositorio) {
         if (args.length < 2) {
             System.out.println("Error: Debe indicar el ID de la candidatura (ej: -ver 13)");
@@ -167,6 +204,12 @@ public class HistorialUsuario {
         throw new IdNoEncontradoException("No se encontró ninguna candidatura con el ID: " + idBuscado);
     }
 
+    /**
+     * Elimina la candidatura cuyo identificador se indica como segundo argumento.
+     *
+     * @param args argumentos de la línea de comandos; el segundo debe ser el identificador de la candidatura a borrar
+     * @param repositorio repositorio del que se lee y en el que se actualiza la candidatura
+     */
     private static void Borrar(String[] args, RepositorioAplicacion repositorio) {
         if (args.length < 2) {
             System.out.println("Error: Debe indicar el ID de la candidatura a borrar (ej: -borrar 13)");
@@ -204,6 +247,12 @@ public class HistorialUsuario {
         }
     }
 
+    /**
+     * Importa las candidaturas de un fichero CSV externo al repositorio actual.
+     *
+     * @param args argumentos de la línea de comandos; el segundo debe ser el nombre del fichero CSV a importar
+     * @param repositorio repositorio en el que se guardan las candidaturas importadas
+     */
     private static void Importar(String[] args, RepositorioAplicacion repositorio) {
         if (args.length < 2) {
             System.out.println("Error: Debe indicar el nombre del archivo CSV a importar (ej: -importar candidaturas.csv)");

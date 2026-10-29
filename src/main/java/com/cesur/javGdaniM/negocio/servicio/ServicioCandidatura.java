@@ -14,10 +14,20 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
+/**
+ * Servicio de negocio para la gestión de candidaturas almacenadas en un fichero de texto.
+ * <p>
+ * Permite añadir candidaturas, buscarlas por identificador y obtener todas las existentes,
+ * validando el formato de las fechas introducidas.
+ */
 public class ServicioCandidatura {
 
+    /** Ruta del fichero de texto donde se almacenan las candidaturas. */
     private final String RUTA_ARCHIVO = "candidaturas.txt";
 
+    /**
+     * Comprueba que el fichero de candidaturas existe y, en caso contrario, lo crea vacío.
+     */
     public void asegurarArchivoExiste() {
         File archivo = new File(RUTA_ARCHIVO);
         try {
@@ -29,6 +39,16 @@ public class ServicioCandidatura {
         }
     }
 
+    /**
+     * Añade una nueva candidatura al final del fichero.
+     * <p>
+     * El identificador se calcula automáticamente a partir de la última candidatura registrada.
+     *
+     * @param titulo título del puesto al que se aplica
+     * @param empresa nombre de la empresa a la que se aplica
+     * @param estado estado inicial de la candidatura
+     * @param fechaStr fecha de la candidatura en formato "dd/MM/yyyy"
+     */
     public void anadirCandidatura(String titulo, String empresa, String estado, String fechaStr) {
         asegurarArchivoExiste();
 
@@ -58,6 +78,11 @@ public class ServicioCandidatura {
         }
     }
 
+    /**
+     * Busca una candidatura por su identificador.
+     *
+     * @param idBuscado identificador de la candidatura que se desea buscar
+     */
     public String buscarPorId(int idBuscado) {
         asegurarArchivoExiste();
         try {
@@ -77,6 +102,9 @@ public class ServicioCandidatura {
     }
 
 
+    /**
+     * Obtiene todas las candidaturas almacenadas en el fichero.
+     */
     public List<String> obtenerTodas() {
         asegurarArchivoExiste();
         try {
@@ -86,6 +114,11 @@ public class ServicioCandidatura {
         }
     }
 
+    /**
+     * Valida que la fecha indicada cumple el formato "dd/MM/yyyy".
+     *
+     * @param fechaStr fecha que se desea validar
+     */
     private void validarFormatoFecha(String fechaStr) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         try {

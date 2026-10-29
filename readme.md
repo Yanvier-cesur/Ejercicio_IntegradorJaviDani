@@ -32,5 +32,7 @@ git clone "https://github.com/Yanvier-cesur/Ejercicio_IntegradorJaviDani.git"
 - JavaDoc
 -  README
 -  Actualización de otras clases
-
+# Enlace Figma
+``https://www.figma.com/design/QRMf1jWPTqR6qnbFt7JUN5/Tarea-Integrador-JavGDanM?node-id=0-1&t=laADxbEb6CkP8Ltp-1
+``
 

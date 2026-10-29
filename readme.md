@@ -13,3 +13,24 @@ La aplicación trata de un CSV donde carga las candidaturas puedes listarlas, ve
 ```bash
 git clone "https://github.com/Yanvier-cesur/Ejercicio_IntegradorJaviDani.git"
 ```
+# Tecnología utilizadas
+- Open Code
+
+# Contribución de cada miembro
+
+## Javier García Mendoza
+### carpetas y sus clases:
+ - Data
+ - Entidad
+ - Negocio
+
+## Daniel Molina Ruiz:
+
+### carpeta y sus clases:
+- Presentation.controller
+### Añadidos:
+- JavaDoc
+-  README
+-  Actualización de otras clases
+
+

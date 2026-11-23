@@ -1,6 +1,6 @@
 package com.cesur.javGdaniM.data.repositorio;
 
-import com.cesur.javGdaniM.data.entidad.AplicacionDeTrabajo;
+import com.cesur.javGdaniM.data.entidad.Oferta;
 import com.cesur.javGdaniM.data.entidad.EstadoCandidatura;
 import com.cesur.javGdaniM.negocio.excepcion.ArchivoInvalidoException;
 
@@ -17,7 +17,7 @@ import java.util.List;
  * Repositorio encargado de la persistencia de las candidaturas en ficheros CSV.
  * <p>
  * Permite guardar, leer y limpiar las candidaturas, así como convertir entre
- * objetos {@link AplicacionDeTrabajo} y las líneas del fichero.
+ * objetos {@link Oferta} y las líneas del fichero.
  */
 public class RepositorioAplicacion {
 
@@ -79,7 +79,7 @@ public class RepositorioAplicacion {
      *
      * @param aplicacion candidatura que se desea convertir
      */
-    public String convertirObjetoALinea(AplicacionDeTrabajo aplicacion) {
+    public String convertirObjetoALinea(Oferta aplicacion) {
         return String.format("%d,%s,%s,%s,%s",
                 aplicacion.getId(),
                 escaparComas(aplicacion.getTitulo()),
@@ -97,10 +97,10 @@ public class RepositorioAplicacion {
      *
      * @param linea línea del fichero CSV a convertir
      */
-    public AplicacionDeTrabajo convertirLineaAObjeto(String linea) {
+    public Oferta convertirLineaAObjeto(String linea) {
         String[] partes = linea.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
         if (partes.length >= 5) {
-            return new AplicacionDeTrabajo(
+            return new Oferta(
                     Integer.parseInt(quitarComillas(partes[0])),
                     quitarComillas(partes[1]),
                     quitarComillas(partes[2]),
@@ -117,7 +117,7 @@ public class RepositorioAplicacion {
      *
      * @param aplicacion candidatura que se desea guardar
      */
-    public void guardar(AplicacionDeTrabajo aplicacion) {
+    public void guardar(Oferta aplicacion) {
         String linea = convertirObjetoALinea(aplicacion) + System.lineSeparator();
         try {
             Files.write(Paths.get(this.rutaFicheroActual), linea.getBytes(), StandardOpenOption.CREATE, StandardOpenOption.APPEND);
@@ -130,7 +130,7 @@ public class RepositorioAplicacion {
     /**
      * Lee las candidaturas almacenadas en el fichero CSV predeterminado.
      */
-    public List<AplicacionDeTrabajo> leerFicheroPredeterminado() {
+    public List<Oferta> leerFicheroPredeterminado() {
         return leerFichero(FICHERO_PREDETERMINADO);
     }
 
@@ -142,7 +142,7 @@ public class RepositorioAplicacion {
      *
      * @param nombreFichero nombre o ruta del fichero CSV que se desea leer
      */
-    public List<AplicacionDeTrabajo> leerFichero(String nombreFichero) {
+    public List<Oferta> leerFichero(String nombreFichero) {
         if (!validarNombreFichero(nombreFichero)) {
             throw new ArchivoInvalidoException("Nombre de fichero no válido para lectura: " + nombreFichero);
         }
@@ -154,10 +154,10 @@ public class RepositorioAplicacion {
 
         try {
             List<String> lineas = Files.readAllLines(path);
-            List<AplicacionDeTrabajo> lista = new ArrayList<>();
+            List<Oferta> lista = new ArrayList<>();
             for (String linea : lineas) {
                 if (linea != null && !linea.trim().isEmpty()) {
-                    AplicacionDeTrabajo app = convertirLineaAObjeto(linea);
+                    Oferta app = convertirLineaAObjeto(linea);
                     if (app != null) {
                         lista.add(app);
                     }

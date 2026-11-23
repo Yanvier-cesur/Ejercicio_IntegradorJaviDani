@@ -3,6 +3,11 @@ Ejercicio creado por `Javier García Mendoza` y `Daniel Molina Ruiz`
 
 La aplicación trata de un CSV donde carga las candidaturas puedes listarlas, ver una concreta por ID, añadir y borrar.
 
+
+
+# IMPORTANTE
+En la base de datos el user es ``USER`` y el password es ``PASSWORD``.
+
 ## Requisitos
 
 - Java 27
@@ -19,14 +24,14 @@ git clone "https://github.com/Yanvier-cesur/Ejercicio_IntegradorJaviDani.git"
 # Contribución de cada miembro
 
 ## Javier García Mendoza
-### carpetas y sus clases:
+### Carpetas y sus clases:
  - Data
  - Entidad
  - Negocio
 
 ## Daniel Molina Ruiz:
 
-### carpeta y sus clases:
+### Carpeta y sus clases:
 - Presentation.controller
 ### Añadidos:
 - JavaDoc

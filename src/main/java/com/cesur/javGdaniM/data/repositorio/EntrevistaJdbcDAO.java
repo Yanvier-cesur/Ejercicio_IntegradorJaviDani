@@ -71,6 +71,11 @@ public class EntrevistaJdbcDAO implements TransactionalDAO<Entrevista> {
     }
 
     @Override
+    public List<Entrevista> findAll(Connection conn) {
+        return List.of();
+    }
+
+    @Override
     public Entrevista save(Entrevista entrevista) {
         try (Connection conn = DataSourceFactory.getDataSource().getConnection()) {
             return save(conn, entrevista);
@@ -244,3 +249,6 @@ public class EntrevistaJdbcDAO implements TransactionalDAO<Entrevista> {
             oferta.setEmpresa(empresa);
             entrevista.setOferta(oferta);
         }
+        return entrevista;
+    }
+}

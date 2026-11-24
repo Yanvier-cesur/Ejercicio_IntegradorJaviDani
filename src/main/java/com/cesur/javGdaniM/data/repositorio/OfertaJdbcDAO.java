@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class OfertaJdbcDAO implements DAO<Oferta> {
+public class OfertaJdbcDAO implements TransactionalDAO<Oferta> {
 
     private static final String BASE_SELECT_WITH_EMPRESA =
             "SELECT o.id, o.id_empresa, o.titulo, o.descripcion, o.estado, " +
@@ -27,9 +27,17 @@ public class OfertaJdbcDAO implements DAO<Oferta> {
 
     @Override
     public Optional<Oferta> findById(Long id) {
+        try (Connection conn = DataSourceFactory.getDataSource().getConnection()) {
+            return findById(conn, id);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error buscando oferta con id " + id, e);
+        }
+    }
+
+    @Override
+    public Optional<Oferta> findById(Connection conn, Long id) {
         String sql = BASE_SELECT_WITH_EMPRESA + " WHERE o.id = ?";
-        try (Connection conn = DataSourceFactory.getDataSource().getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setLong(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
@@ -59,11 +67,24 @@ public class OfertaJdbcDAO implements DAO<Oferta> {
     }
 
     @Override
+    public List<Oferta> findAll(Connection conn) {
+        return List.of();
+    }
+
+    @Override
     public Oferta save(Oferta oferta) {
+        try (Connection conn = DataSourceFactory.getDataSource().getConnection()) {
+            return save(conn, oferta);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error guardando oferta", e);
+        }
+    }
+
+    @Override
+    public Oferta save(Connection conn, Oferta oferta) {
         String sql = "INSERT INTO oferta (id_empresa, titulo, descripcion, estado, fecha_postulacion, enlace, salario, notas) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        try (Connection conn = DataSourceFactory.getDataSource().getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setLong(1, getEmpresaId(oferta));
             ps.setString(2, oferta.getTitulo());
             ps.setString(3, oferta.getDescripcion());
@@ -87,10 +108,18 @@ public class OfertaJdbcDAO implements DAO<Oferta> {
 
     @Override
     public void update(Oferta oferta) {
+        try (Connection conn = DataSourceFactory.getDataSource().getConnection()) {
+            update(conn, oferta);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error actualizando oferta con id " + oferta.getId(), e);
+        }
+    }
+
+    @Override
+    public void update(Connection conn, Oferta oferta) {
         String sql = "UPDATE oferta SET id_empresa = ?, titulo = ?, descripcion = ?, estado = ?, " +
                 "fecha_postulacion = ?, enlace = ?, salario = ?, notas = ? WHERE id = ?";
-        try (Connection conn = DataSourceFactory.getDataSource().getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setLong(1, getEmpresaId(oferta));
             ps.setString(2, oferta.getTitulo());
             ps.setString(3, oferta.getDescripcion());
@@ -108,9 +137,17 @@ public class OfertaJdbcDAO implements DAO<Oferta> {
 
     @Override
     public void deleteById(Long id) {
+        try (Connection conn = DataSourceFactory.getDataSource().getConnection()) {
+            deleteById(conn, id);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error eliminando oferta con id " + id, e);
+        }
+    }
+
+    @Override
+    public void deleteById(Connection conn, Long id) {
         String sql = "DELETE FROM oferta WHERE id = ?";
-        try (Connection conn = DataSourceFactory.getDataSource().getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setLong(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {

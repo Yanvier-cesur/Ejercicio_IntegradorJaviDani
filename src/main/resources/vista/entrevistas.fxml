@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="580.0" prefWidth="860.0"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.cesur.javGdaniM.presentation.controller.EntrevistaController">
+
+    <top>
+        <VBox spacing="4.0">
+            <padding>
+                <Insets top="12.0" right="14.0" bottom="10.0" left="14.0"/>
+            </padding>
+            <Label text="Gestión de Entrevistas" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+            <Label fx:id="lblInfoOferta" text="Oferta: -" style="-fx-font-size: 13px;"/>
+            <Label fx:id="lblEstadoOferta" text="Empresa: - | Estado: -" style="-fx-text-fill: #555555;"/>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox spacing="6.0">
+            <padding>
+                <Insets top="4.0" right="10.0" bottom="12.0" left="14.0"/>
+            </padding>
+            <Label text="Historial de entrevistas" style="-fx-font-weight: bold;"/>
+            <TableView fx:id="tablaEntrevistas" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colId" text="ID" prefWidth="50.0"/>
+                    <TableColumn fx:id="colFecha" text="Fecha" prefWidth="110.0"/>
+                    <TableColumn fx:id="colTipo" text="Tipo" prefWidth="130.0"/>
+                    <TableColumn fx:id="colResultado" text="Resultado" prefWidth="130.0"/>
+                    <TableColumn fx:id="colNotas" text="Notas" prefWidth="200.0"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+
+    <right>
+        <VBox spacing="10.0" prefWidth="310.0">
+            <padding>
+                <Insets top="4.0" right="14.0" bottom="12.0" left="10.0"/>
+            </padding>
+            <Label text="Nueva entrevista" style="-fx-font-size: 15px; -fx-font-weight: bold;"/>
+
+            <GridPane hgap="8.0" vgap="8.0">
+                <columnConstraints>
+                    <ColumnConstraints minWidth="95.0" prefWidth="105.0"/>
+                    <ColumnConstraints hgrow="ALWAYS"/>
+                </columnConstraints>
+
+                <Label text="Fecha" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <DatePicker fx:id="dateFecha" maxWidth="Infinity" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                <Label text="Tipo *" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="comboTipo" promptText="Ej. Técnica, RRHH" editable="true" maxWidth="Infinity"
+                          GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                <Label text="Resultado *" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="comboResultado" promptText="Ej. Pendiente, Apta" editable="true" maxWidth="Infinity"
+                          GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                <Label text="Estado oferta" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="comboNuevoEstado" promptText="Mantener actual" maxWidth="Infinity"
+                          GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                <Label text="Notas" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                <TextArea fx:id="txtNotas" prefRowCount="4" wrapText="true"
+                          GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+                <rowConstraints>
+                    <RowConstraints/>
+                    <RowConstraints/>
+                    <RowConstraints/>
+                    <RowConstraints/>
+                    <RowConstraints/>
+                </rowConstraints>
+            </GridPane>
+
+            <Button fx:id="btnGuardar" text="Guardar entrevista" onAction="#onGuardarEntrevista" maxWidth="Infinity"/>
+            <Button fx:id="btnLimpiar" text="Limpiar campos" onAction="#onLimpiarCampos" maxWidth="Infinity"/>
+            <Button fx:id="btnCerrar" text="Cerrar" onAction="#onCerrar" maxWidth="Infinity"/>
+        </VBox>
+    </right>
+</BorderPane>

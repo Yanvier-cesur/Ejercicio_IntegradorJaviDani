@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="680.0" prefWidth="1120.0"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.cesur.javGdaniM.presentation.controller.PrincipalController">
+
+    <top>
+        <VBox spacing="10.0">
+            <padding>
+                <Insets top="12.0" right="14.0" bottom="10.0" left="14.0"/>
+            </padding>
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+                <Label text="Gestión de Candidaturas y Ofertas" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button fx:id="btnMigrarCsv" text="Importar CSV" onAction="#onMigrarCsv"/>
+            </HBox>
+
+            <HBox alignment="CENTER_LEFT" spacing="8.0">
+                <ComboBox fx:id="comboFiltroEmpresa" promptText="Empresa" prefWidth="160.0"/>
+                <ComboBox fx:id="comboFiltroEstado" promptText="Estado" prefWidth="150.0"/>
+                <TextField fx:id="txtFiltroSalarioMin" promptText="Salario mín." prefWidth="110.0"/>
+                <DatePicker fx:id="dateFiltroDesde" promptText="Desde fecha" prefWidth="140.0"/>
+                <Button fx:id="btnFiltrar" text="Filtrar" onAction="#onFiltrar"/>
+                <Button fx:id="btnLimpiarFiltros" text="Limpiar" onAction="#onLimpiarFiltros"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox spacing="6.0">
+            <padding>
+                <Insets top="4.0" right="10.0" bottom="12.0" left="14.0"/>
+            </padding>
+            <TableView fx:id="tablaOfertas" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colId" text="ID" prefWidth="55.0"/>
+                    <TableColumn fx:id="colTitulo" text="Título" prefWidth="210.0"/>
+                    <TableColumn fx:id="colEmpresa" text="Empresa" prefWidth="160.0"/>
+                    <TableColumn fx:id="colEstado" text="Estado" prefWidth="130.0"/>
+                    <TableColumn fx:id="colFecha" text="Fecha" prefWidth="110.0"/>
+                    <TableColumn fx:id="colSalario" text="Salario" prefWidth="95.0"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+
+    <right>
+        <VBox spacing="10.0" prefWidth="340.0">
+            <padding>
+                <Insets top="4.0" right="14.0" bottom="12.0" left="10.0"/>
+            </padding>
+            <Label text="Detalle de oferta" style="-fx-font-size: 15px; -fx-font-weight: bold;"/>
+
+            <GridPane hgap="8.0" vgap="8.0">
+                <columnConstraints>
+                    <ColumnConstraints minWidth="85.0" prefWidth="90.0"/>
+                    <ColumnConstraints hgrow="ALWAYS"/>
+                </columnConstraints>
+
+                <Label text="Título *" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtTitulo" promptText="Ej. Java Developer" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                <Label text="Empresa *" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="comboEmpresa" promptText="Selecciona empresa" maxWidth="Infinity" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                <Label text="Estado *" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="comboEstado" promptText="Selecciona estado" maxWidth="Infinity" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                <Label text="Fecha" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                <DatePicker fx:id="dateFecha" maxWidth="Infinity" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                <Label text="Salario" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtSalario" promptText="Ej. 28000" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+                <Label text="Enlace" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                <TextField fx:id="txtEnlace" promptText="https://..." GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+                <Label text="Descripción" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                <TextArea fx:id="txtDescripcion" prefRowCount="2" wrapText="true" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+
+                <Label text="Notas" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+                <TextArea fx:id="txtNotas" prefRowCount="2" wrapText="true" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+
+                <rowConstraints>
+                    <RowConstraints/>
+                    <RowConstraints/>
+                    <RowConstraints/>
+                    <RowConstraints/>
+                    <RowConstraints/>
+                    <RowConstraints/>
+                    <RowConstraints/>
+                    <RowConstraints/>
+                </rowConstraints>
+            </GridPane>
+
+            <HBox spacing="8.0">
+                <Button fx:id="btnGuardar" text="Guardar" onAction="#onGuardarOferta" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+                <Button fx:id="btnActualizar" text="Actualizar" onAction="#onActualizarOferta" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+            </HBox>
+
+            <HBox spacing="8.0">
+                <Button fx:id="btnEliminar" text="Eliminar" onAction="#onEliminarOferta" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+                <Button fx:id="btnLimpiar" text="Limpiar" onAction="#onLimpiarFormulario" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+            </HBox>
+
+            <Button fx:id="btnEntrevistas" text="Gestionar entrevistas" onAction="#onAbrirEntrevistas" maxWidth="Infinity"/>
+        </VBox>
+    </right>
+</BorderPane>

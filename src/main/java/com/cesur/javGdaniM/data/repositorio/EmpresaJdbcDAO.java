@@ -12,13 +12,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class EmpresaJdbcDAO implements DAO<Empresa> {
+public class EmpresaJdbcDAO implements TransactionalDAO<Empresa> {
 
     @Override
     public Optional<Empresa> findById(Long id) {
+        try (Connection conn = DataSourceFactory.getDataSource().getConnection()) {
+            return findById(conn, id);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error buscando empresa con id " + id, e);
+        }
+    }
+
+    @Override
+    public Optional<Empresa> findById(Connection conn, Long id) {
         String sql = "SELECT id, nombre, sector, web, fecha_registro FROM empresa WHERE id = ?";
-        try (Connection conn = DataSourceFactory.getDataSource().getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setLong(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
@@ -48,10 +56,23 @@ public class EmpresaJdbcDAO implements DAO<Empresa> {
     }
 
     @Override
+    public List<Empresa> findAll(Connection conn) {
+        return List.of();
+    }
+
+    @Override
     public Empresa save(Empresa empresa) {
+        try (Connection conn = DataSourceFactory.getDataSource().getConnection()) {
+            return save(conn, empresa);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error guardando empresa", e);
+        }
+    }
+
+    @Override
+    public Empresa save(Connection conn, Empresa empresa) {
         String sql = "INSERT INTO empresa (nombre, sector, web, fecha_registro) VALUES (?, ?, ?, ?)";
-        try (Connection conn = DataSourceFactory.getDataSource().getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, empresa.nombre);
             ps.setString(2, empresa.sector);
             ps.setString(3, empresa.web);
@@ -71,9 +92,17 @@ public class EmpresaJdbcDAO implements DAO<Empresa> {
 
     @Override
     public void update(Empresa empresa) {
+        try (Connection conn = DataSourceFactory.getDataSource().getConnection()) {
+            update(conn, empresa);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error actualizando empresa con id " + empresa.id, e);
+        }
+    }
+
+    @Override
+    public void update(Connection conn, Empresa empresa) {
         String sql = "UPDATE empresa SET nombre = ?, sector = ?, web = ?, fecha_registro = ? WHERE id = ?";
-        try (Connection conn = DataSourceFactory.getDataSource().getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, empresa.nombre);
             ps.setString(2, empresa.sector);
             ps.setString(3, empresa.web);
@@ -87,9 +116,17 @@ public class EmpresaJdbcDAO implements DAO<Empresa> {
 
     @Override
     public void deleteById(Long id) {
+        try (Connection conn = DataSourceFactory.getDataSource().getConnection()) {
+            deleteById(conn, id);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error eliminando empresa con id " + id, e);
+        }
+    }
+
+    @Override
+    public void deleteById(Connection conn, Long id) {
         String sql = "DELETE FROM empresa WHERE id = ?";
-        try (Connection conn = DataSourceFactory.getDataSource().getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setLong(1, id);
             ps.executeUpdate();
         } catch (SQLException e) {

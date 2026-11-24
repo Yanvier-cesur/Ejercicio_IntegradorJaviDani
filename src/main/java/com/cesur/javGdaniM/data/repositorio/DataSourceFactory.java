@@ -4,9 +4,10 @@ import com.mysql.cj.jdbc.MysqlDataSource;
 
 import javax.sql.DataSource;
 public class DataSourceFactory {
-    private static String url = "jdbc:mysql://localhost:3306";
-    private static String username = System.getenv("USER") ;
-    private static String password = System.getenv("PASSWORD") ;
+    private static final String url =
+            "jdbc:mysql://localhost:3306/IntegradorJaviDani?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true";
+    private static String username = ("uma") ;
+    private static String password = ("uma") ;
     private static DataSource dataSource = null;
 
     public static DataSource getDataSource() {

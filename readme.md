@@ -1,8 +1,8 @@
 # Ejercicio integrador 
 Ejercicio creado por `Javier García Mendoza` y `Daniel Molina Ruiz`
 
-La aplicación trata de un CSV donde carga las candidaturas puedes listarlas, ver una concreta por ID, añadir y borrar.
-
+ Version 1.0 La aplicación trata de un CSV donde carga las candidaturas puedes listarlas, ver una concreta por ID, añadir y borrar.
+ Version 2.0 Añadido metodos , java FX y JDBC
 
 
 # IMPORTANTE
@@ -25,6 +25,8 @@ git clone "https://github.com/Yanvier-cesur/Ejercicio_IntegradorJaviDani.git"
 
 ## Javier García Mendoza
 ### Carpetas y sus clases:
+- Repositorio
+- JDBC
  - Data
  - Entidad
  - Negocio
@@ -33,6 +35,10 @@ git clone "https://github.com/Yanvier-cesur/Ejercicio_IntegradorJaviDani.git"
 
 ### Carpeta y sus clases:
 - Presentation.controller
+- main
+- PrincipalController
+- EntrevistaController
+- Vista
 ### Añadidos:
 - JavaDoc
 -  README
